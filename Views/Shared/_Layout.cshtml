@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@*@ViewBag.Title -*@ Profile Management System</title>
+    <link rel="icon" href="~/favicon.png">   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+        }
+
+        .btn {
+            border-radius: 5px;
+        }
+
+        .d-flex.gap-2 > * {
+            margin-right: 10px;
+        }
+
+        .required-label::after {
+            content: " *"; /* Adds an asterisk with a space */
+            color: red; /* Makes it red for visibility */
+            font-weight: bold; /* Optional: Makes it bold */
+        }
+        .header-logo {
+            width: 30px;
+            border-radius: 70%;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div>
+            <img src="~/favicon.png" class="header-logo">
+        </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index", "Profile")">Profile Management System</a>
+            @if (Request.IsAuthenticated && Session["Username"] != null)
+            {
+                <div class="navbar-nav ms-auto">
+                    <span class="navbar-text text-white me-3">
+                        Welcome, @Session["Username"]
+                    </span>
+                    <a href="@Url.Action("Logout", "Account")" class="btn btn-primary">Logout</a>                    
+                </div>
+            }
+        </div>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
